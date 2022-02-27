@@ -22,7 +22,7 @@
 
 # Define macro parameter
 readonly GITHUB_USER="czbone"
-readonly GITHUB_REPO="oneliner-env"
+readonly GITHUB_REPO="oneliner-env-dummy"
 readonly WORK_DIR=/root/${GITHUB_REPO}_work
 readonly PLAYBOOK="lemp"
 readonly ANSIBLE_BIN=/root/.local/bin
