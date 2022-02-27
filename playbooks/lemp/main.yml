@@ -1,0 +1,10 @@
+- hosts: localhost
+  connection: local
+  collections:
+    - ansible.posix
+    
+  roles:
+    - webofmars.dummy
+
+  pre_tasks:
+    - selinux: state=disabled

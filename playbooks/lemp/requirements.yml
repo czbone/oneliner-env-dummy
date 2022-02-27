@@ -1,0 +1,5 @@
+---
+roles:
+  - webofmars.dummy
+collections:
+  - ansible.posix
