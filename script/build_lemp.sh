@@ -93,11 +93,11 @@ fi
 # Install ansible command
 if ! type -P ansible >/dev/null ; then
     if [ "${DIST_NAME}" == 'CentOS' ]; then
-        $INSTALL_PACKAGE_CMD epel-next-release
-        $INSTALL_PACKAGE_CMD ansible
+        ${INSTALL_PACKAGE_CMD} epel-next-release
+        ${INSTALL_PACKAGE_CMD} ansible
     elif [ "${DIST_NAME}" == 'Rocky Linux' ]; then
-        $INSTALL_PACKAGE_CMD epel-next-release
-        $INSTALL_PACKAGE_CMD ansible
+        ${INSTALL_PACKAGE_CMD} epel-next-release
+        ${INSTALL_PACKAGE_CMD} ansible
     # elif [ "${DIST_NAME}" == 'Alma Linux' ]; then
     fi
 fi
@@ -105,7 +105,7 @@ fi
 # If ansible not installed, install ansible by local mode
 if ! type -P ansible >/dev/null ; then
     # Install ansible with Python3.8
-    $INSTALL_PACKAGE_CMD python38
+    ${INSTALL_PACKAGE_CMD} python38
     pip3.8 install --user ansible
     readonly ANSIBLE_LOCAL_MODE=true
 else
@@ -113,7 +113,7 @@ else
 fi
 
 # Install git command
-$INSTALL_PACKAGE_CMD git
+${INSTALL_PACKAGE_CMD} git
 
 # Download the latest repository archive
 if ${TEST_MODE}; then
