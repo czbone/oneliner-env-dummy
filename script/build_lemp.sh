@@ -25,7 +25,8 @@ readonly GITHUB_USER="czbone"
 readonly GITHUB_REPO="oneliner-env-dummy"
 readonly WORK_DIR=/root/${GITHUB_REPO}_work
 readonly PLAYBOOK="lemp"
-readonly ANSIBLE_BIN=/root/.local/bin
+readonly LOCAL_ANSIBLE_BIN=/root/.local/bin
+readonly INSTALL_PACKAGE_CMD="dnf -y install"
 
 # check root user
 readonly USERID=`id | sed 's/uid=\([0-9]*\)(.*/\1/'`
@@ -89,29 +90,21 @@ else
     readonly TEST_MODE="false"
 fi
 
-# Install ansible
-declare INSTALL_PACKAGE_CMD=""
-if [ $OS == 'CentOS' ]; then
-    INSTALL_PACKAGE_CMD="yum -y install"
-    
-    # If Phthon3.6 is installed, install Python3.8
-    yum install -y python38
-    pip3.8 install --user ansible
-    #pip3.8 install selinux
-    #alternatives --set python3 /usr/bin/python3.8
-elif [ $OS == 'Ubuntu' ]; then
-    if ! type -P ansible >/dev/null ; then
-        INSTALL_PACKAGE_CMD="apt -y install"
-    
-        # Repository update for ansible
-        apt -y update
-        apt -y upgrade
-        apt -y install software-properties-common
-        apt-add-repository --yes --update ppa:ansible/ansible
-
+# Check ansible command
+if ! type -P ansible >/dev/null ; then
+    if [ $DIST_NAME == 'CentOS' ]; then
+        $INSTALL_PACKAGE_CMD epel-next-release
         $INSTALL_PACKAGE_CMD ansible
+    elif [ $DIST_NAME == 'Rocky Linux' ]; then
+    elif [ $DIST_NAME == 'Alma Linux' ]; then
     fi
 fi
+
+# Install ansible
+
+    # If Phthon3.6 is installed, install Python3.8
+#    dnf install -y python38
+#    pip3.8 install --user ansible
 
 # Install git command
 if [ "$INSTALL_PACKAGE_CMD" != '' ]; then
@@ -161,5 +154,7 @@ echo ${filename}" unarchived"
 
 # launch ansible
 cd ${WORK_DIR}/${GITHUB_REPO}/playbooks/${PLAYBOOK}
-${ANSIBLE_BIN}/ansible-galaxy install --role-file=requirements.yml
-${ANSIBLE_BIN}/ansible-playbook -i localhost, main.yml
+#${LOCAL_ANSIBLE_BIN}/ansible-galaxy install --role-file=requirements.yml
+#${LOCAL_ANSIBLE_BIN}/ansible-playbook -i localhost, main.yml
+ansible-galaxy install --role-file=requirements.yml
+ansible-playbook -i localhost, main.yml
