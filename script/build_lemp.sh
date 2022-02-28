@@ -83,37 +83,40 @@ echo "########################################################################"
 
 # Get test mode
 if [ "$1" == '-test' ]; then
-    readonly TEST_MODE="true"
+    readonly TEST_MODE=true
     
     echo "################# START TEST MODE #################"
 else
-    readonly TEST_MODE="false"
+    readonly TEST_MODE=false
 fi
 
-# Check ansible command
+# Install ansible command
 if ! type -P ansible >/dev/null ; then
     if [ "${DIST_NAME}" == 'CentOS' ]; then
-    #     $INSTALL_PACKAGE_CMD epel-next-release
-    #     $INSTALL_PACKAGE_CMD ansible
-    # elif [ "${DIST_NAME}" == 'Rocky Linux' ]; then
+        $INSTALL_PACKAGE_CMD epel-next-release
+        $INSTALL_PACKAGE_CMD ansible
+    elif [ "${DIST_NAME}" == 'Rocky Linux' ]; then
+        $INSTALL_PACKAGE_CMD epel-next-release
+        $INSTALL_PACKAGE_CMD ansible
     # elif [ "${DIST_NAME}" == 'Alma Linux' ]; then
-    echo '---'
     fi
 fi
 
-# Install ansible
-
-    # If Phthon3.6 is installed, install Python3.8
-#    dnf install -y python38
-#    pip3.8 install --user ansible
-
-# Install git command
-if [ "$INSTALL_PACKAGE_CMD" != '' ]; then
-    $INSTALL_PACKAGE_CMD git
+# If ansible not installed, install ansible by local mode
+if ! type -P ansible >/dev/null ; then
+    # Install ansible with Python3.8
+    $INSTALL_PACKAGE_CMD python38
+    pip3.8 install --user ansible
+    readonly ANSIBLE_LOCAL_MODE=true
+else
+    readonly ANSIBLE_LOCAL_MODE=false
 fi
 
+# Install git command
+$INSTALL_PACKAGE_CMD git
+
 # Download the latest repository archive
-if [ $TEST_MODE == 'true' ]; then
+if ${TEST_MODE}; then
     url="https://github.com/${GITHUB_USER}/${GITHUB_REPO}/archive/master.tar.gz"
     version="new"
 else
@@ -155,7 +158,10 @@ echo ${filename}" unarchived"
 
 # launch ansible
 cd ${WORK_DIR}/${GITHUB_REPO}/playbooks/${PLAYBOOK}
-#${LOCAL_ANSIBLE_BIN}/ansible-galaxy install --role-file=requirements.yml
-#${LOCAL_ANSIBLE_BIN}/ansible-playbook -i localhost, main.yml
-ansible-galaxy install --role-file=requirements.yml
-ansible-playbook -i localhost, main.yml
+if ${ANSIBLE_LOCAL_MODE}; then
+    ${LOCAL_ANSIBLE_BIN}/ansible-galaxy install --role-file=requirements.yml
+    ${LOCAL_ANSIBLE_BIN}/ansible-playbook -i localhost, main.yml
+else
+    ansible-galaxy install --role-file=requirements.yml
+    ansible-playbook -i localhost, main.yml
+fi
