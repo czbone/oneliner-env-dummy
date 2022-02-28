@@ -95,8 +95,8 @@ if ! type -P ansible >/dev/null ; then
     if [ $DIST_NAME == 'CentOS' ]; then
         $INSTALL_PACKAGE_CMD epel-next-release
         $INSTALL_PACKAGE_CMD ansible
-    elif [ $DIST_NAME == 'Rocky Linux' ]; then
-    elif [ $DIST_NAME == 'Alma Linux' ]; then
+    #elif [ $DIST_NAME == 'Rocky Linux' ]; then
+    #elif [ $DIST_NAME == 'Alma Linux' ]; then
     fi
 fi
 
