@@ -7,7 +7,7 @@
   roles:
     - webofmars.dummy
     - geerlingguy.repo-epel
-    - geerlingguy.repo-remi
+    - role: geerlingguy.repo-remi
       when: (ansible_distribution == 'CentOS' and ansible_distribution_major_version == '8') 
 
   pre_tasks:
