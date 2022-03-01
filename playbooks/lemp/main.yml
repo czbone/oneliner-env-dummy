@@ -2,6 +2,7 @@
   connection: local
   collections:
     - ansible.posix
+    - community.general
     
   roles:
     - webofmars.dummy
