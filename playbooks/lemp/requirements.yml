@@ -1,5 +1,7 @@
 ---
 roles:
   - webofmars.dummy
+  - geerlingguy.repo-epel
+  - geerlingguy.repo-remi
 collections:
   - ansible.posix

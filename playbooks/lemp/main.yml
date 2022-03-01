@@ -5,6 +5,8 @@
     
   roles:
     - webofmars.dummy
+    - geerlingguy.repo-epel
+    - geerlingguy.repo-remi
 
   pre_tasks:
     - selinux: state=disabled
