@@ -8,6 +8,14 @@
     - webofmars.dummy
     - geerlingguy.repo-epel
     - geerlingguy.repo-remi
+      when: (ansible_distribution == 'CentOS' and ansible_distribution_major_version == '8') 
 
   pre_tasks:
     - selinux: state=disabled
+
+  tasks:
+    - name: Install Remi repository
+      dnf:
+        name: 'https://rpms.remirepo.net/enterprise/remi-release-9.rpm'
+        state: present
+      when: (ansible_distribution == 'CentOS' and ansible_distribution_major_version == '9')
