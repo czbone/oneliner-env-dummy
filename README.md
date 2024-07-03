@@ -20,5 +20,5 @@ Ansible起動までをテストします。
 
 ### 実行コマンド
 ```
-curl https://raw.githubusercontent.com/czbone/oneliner-env-dummy/master/test/build_lemp.sh | bash
+curl https://raw.githubusercontent.com/czbone/oneliner-env-dummy/master/test/start.sh | bash
 ```
