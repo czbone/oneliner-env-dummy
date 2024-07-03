@@ -16,8 +16,7 @@
 readonly GITHUB_USER="czbone"
 readonly GITHUB_REPO="oneliner-env-dummy"
 readonly WORK_DIR=/root/${GITHUB_REPO}_work
-readonly PLAYBOOK="lemp"
-readonly LOCAL_ANSIBLE_BIN=/root/.local/bin
+readonly PLAYBOOK="dummy"
 readonly INSTALL_PACKAGE_CMD="apt -y install"
 
 # check root user
