@@ -1,13 +1,13 @@
 #!/bin/bash
 # 
-# Script Name: build_lemp.sh
+# Script Name: start.sh
 #
 # Version:      5.0.0
 # Author:       Naoki Hirata
 # Date:         2024-07-03
-# Usage:        build_lemp.sh [-test]
+# Usage:        start.sh [-test]
 # Options:      -test      test mode execution with the latest source package
-# Description:  This script builds LEMP(Linux Nginx, MariaDB, Linux) server environment with the one-liner command.
+# Description:  This script builds server environment with the one-liner command.
 # Version History:
 #               5.0.0  (2024-07-03) renewal release
 # License:      MIT License
@@ -18,7 +18,6 @@ readonly GITHUB_REPO="oneliner-env-dummy"
 readonly WORK_DIR=/root/${GITHUB_REPO}_work
 readonly PLAYBOOK="lemp"
 readonly LOCAL_ANSIBLE_BIN=/root/.local/bin
-#readonly INSTALL_PACKAGE_CMD="dnf -y install"
 readonly INSTALL_PACKAGE_CMD="apt -y install"
 
 # check root user
@@ -73,24 +72,7 @@ if ! type -P ansible >/dev/null ; then
     ${INSTALL_PACKAGE_CMD} software-properties-common
     add-apt-repository --yes --update ppa:ansible/ansible
     ${INSTALL_PACKAGE_CMD} ansible-core
-    # if [ "${DIST_NAME}" == 'CentOS' ]; then
-    #     ${INSTALL_PACKAGE_CMD} ansible-core
-    # elif [ "${DIST_NAME}" == 'Rocky Linux' ]; then
-    #     ${INSTALL_PACKAGE_CMD} ansible-core
-    # # elif [ "${DIST_NAME}" == 'Alma Linux' ]; then
-    # fi
 fi
-
-# If ansible not installed, install ansible by local mode
-# if ! type -P ansible >/dev/null ; then
-#     # Install ansible with Python3.8
-#     ${INSTALL_PACKAGE_CMD} python38
-#     pip3.8 install --user ansible
-#     readonly ANSIBLE_LOCAL_MODE=true
-# else
-#     readonly ANSIBLE_LOCAL_MODE=false
-# fi
-# Install Ansible
 
 # Install git command
 ${INSTALL_PACKAGE_CMD} git
@@ -138,11 +120,5 @@ echo ${filename}" unarchived"
 
 # launch ansible
 cd ${WORK_DIR}/${GITHUB_REPO}/playbooks/${PLAYBOOK}
-# if ${ANSIBLE_LOCAL_MODE}; then
-#     echo "################# START ANSIBLE LOCAL MODE #################"
-#     ${LOCAL_ANSIBLE_BIN}/ansible-galaxy install --role-file=requirements.yml
-#     ${LOCAL_ANSIBLE_BIN}/ansible-playbook -i localhost, main.yml
-# else
-    ansible-galaxy install --role-file=requirements.yml
-    ansible-playbook -i localhost, main.yml
-#fi
+ansible-galaxy install --role-file=requirements.yml
+ansible-playbook -i localhost, main.yml
