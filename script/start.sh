@@ -7,7 +7,7 @@
 # Date:         2024-07-03
 # Usage:        start.sh [-test]
 # Options:      -test      test mode execution with the latest source package
-# Description:  This script builds server environment with the one-liner command.
+# Description:  This script builds server environment by one-liner command.
 # Version History:
 #               6.0  (2024-07-03) renewal release
 # License:      MIT License
@@ -62,7 +62,7 @@ echo "########################################################################"
 if [ "$1" == '-test' ]; then
     readonly TEST_MODE=true
 
-    echo "################# START TEST MODE #################"
+    echo ">>>>>>>>>>>>>>>>>>>>>> START TEST MODE <<<<<<<<<<<<<<<<<<<<<<"
 else
     readonly TEST_MODE=false
 fi
