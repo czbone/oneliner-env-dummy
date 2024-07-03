@@ -70,6 +70,8 @@ fi
 
 # Install ansible command
 if ! type -P ansible >/dev/null ; then
+    ${INSTALL_PACKAGE_CMD} software-properties-common
+    add-apt-repository --yes --update ppa:ansible/ansible
     ${INSTALL_PACKAGE_CMD} ansible-core
     # if [ "${DIST_NAME}" == 'CentOS' ]; then
     #     ${INSTALL_PACKAGE_CMD} ansible-core
