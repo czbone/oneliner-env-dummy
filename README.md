@@ -4,9 +4,9 @@ Ansibleで環境構築するスクリプトの起動シェルをテストしま�
 サーバに`root`ログインし１行のコマンドを実行するとテストを開始します。
 
 ## 対象OS
-- CentOS Stream 8
 
-CentOS 8の場合はStream 8へ移行してください。
+- Ubuntu20
+- Ubuntu22
 
 ## ライセンス
 
