@@ -2,22 +2,14 @@
 # 
 # Script Name: build_lemp.sh
 #
-# Version:      4.0.0
+# Version:      5.0.0
 # Author:       Naoki Hirata
-# Date:         2022-02-07
+# Date:         2024-07-03
 # Usage:        build_lemp.sh [-test]
 # Options:      -test      test mode execution with the latest source package
 # Description:  This script builds LEMP(Linux Nginx, MariaDB, Linux) server environment with the one-liner command.
 # Version History:
-#               1.0.0  (2018-12-09) initial version
-#               1.1.0  (2018-12-12) fix PHP_SELF incorrect problem
-#                                   fix PHP session not seved problem
-#               1.2.0  (2018-12-12) update for PHP v7.3
-#               2.0.0  (2019-01-06) support Ubuntu18
-#               2.1.0  (2019-06-03) fix Ubuntu18 Ansible repository problem
-#               3.1.0  (2021-09-02) add Git
-#               4.0.0  (2022-02-07) support CentOS 8 and unsupport CentOS 7
-#               4.0.1  (2022-02-26) fix ansible-galaxy command option
+#               5.0.0  (2024-07-03) renewal release
 # License:      MIT License
 
 # Define macro parameter
@@ -47,26 +39,11 @@ elif [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
     RELEASE_FILE=/etc/os-release
     if grep '^NAME="CentOS' ${RELEASE_FILE} >/dev/null; then
         OS="CentOS"
-        DIST_NAME="CentOS"
-
-        OS_VERSION=$(. /etc/os-release; echo $VERSION_ID)
-        if [ $((OS_VERSION)) -lt 8 ]; then
-            echo "Unsupported os version. The minimum required version is 8."
-            exit 1
-        fi
-    elif grep '^NAME="Rocky Linux' ${RELEASE_FILE} >/dev/null; then
-        OS="CentOS"
-        DIST_NAME="Rocky Linux"
-    elif grep '^NAME="AlmaLinux' ${RELEASE_FILE} >/dev/null; then
-        OS="CentOS"
-        DIST_NAME="Alma Linux"
-    elif grep '^NAME="Amazon' ${RELEASE_FILE} >/dev/null; then
-        OS="Amazon Linux"
+        #DIST_NAME="CentOS"
     elif grep '^NAME="Ubuntu' ${RELEASE_FILE} >/dev/null; then
         OS="Ubuntu"
+        DIST_NAME="Ubuntu"
     fi
-elif [ "$(expr substr $(uname -s) 1 6)" == 'CYGWIN' ]; then
-    OS='Cygwin'
 fi
 
 # Exit if unsupported os
@@ -84,7 +61,7 @@ echo "########################################################################"
 # Get test mode
 if [ "$1" == '-test' ]; then
     readonly TEST_MODE=true
-    
+
     echo "################# START TEST MODE #################"
 else
     readonly TEST_MODE=false
