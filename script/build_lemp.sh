@@ -70,7 +70,7 @@ fi
 
 # Install ansible command
 if ! type -P ansible >/dev/null ; then
-    ${INSTALL_PACKAGE_CMD} ansible
+    ${INSTALL_PACKAGE_CMD} ansible-core
     # if [ "${DIST_NAME}" == 'CentOS' ]; then
     #     ${INSTALL_PACKAGE_CMD} ansible-core
     # elif [ "${DIST_NAME}" == 'Rocky Linux' ]; then
