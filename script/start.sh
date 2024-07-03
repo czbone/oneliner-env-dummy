@@ -1,5 +1,5 @@
 #!/bin/bash
-# 
+#
 # Script Name: start.sh
 #
 # Version:      6.0
@@ -9,7 +9,7 @@
 # Options:      -test      test mode execution with the latest source package
 # Description:  This script builds server environment by one-liner command.
 # Version History:
-#               6.0  (2024-07-03) renewal release
+#               6.0  (2024-07-03) renewal release for Ubuntu
 # License:      MIT License
 
 # Define macro parameter
@@ -74,7 +74,7 @@ if ! type -P ansible >/dev/null ; then
 fi
 
 # Install git command
-${INSTALL_PACKAGE_CMD} git
+#${INSTALL_PACKAGE_CMD} git
 
 # Download the latest repository archive
 if ${TEST_MODE}; then
@@ -96,7 +96,7 @@ savefilelist=`ls -1`
 
 # Download archived repository
 echo "########################################################################"
-echo "Start download GitHub repository ${GITHUB_USER}/${GITHUB_REPO}" 
+echo "Start download GitHub repository ${GITHUB_USER}/${GITHUB_REPO}"
 curl -s -o ${filepath} -L $url
 
 # Remove old files
