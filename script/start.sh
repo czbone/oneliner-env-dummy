@@ -2,14 +2,14 @@
 # 
 # Script Name: start.sh
 #
-# Version:      5.0.0
+# Version:      6.0
 # Author:       Naoki Hirata
 # Date:         2024-07-03
 # Usage:        start.sh [-test]
 # Options:      -test      test mode execution with the latest source package
 # Description:  This script builds server environment with the one-liner command.
 # Version History:
-#               5.0.0  (2024-07-03) renewal release
+#               6.0  (2024-07-03) renewal release
 # License:      MIT License
 
 # Define macro parameter
