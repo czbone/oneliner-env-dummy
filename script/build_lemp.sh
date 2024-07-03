@@ -18,7 +18,8 @@ readonly GITHUB_REPO="oneliner-env-dummy"
 readonly WORK_DIR=/root/${GITHUB_REPO}_work
 readonly PLAYBOOK="lemp"
 readonly LOCAL_ANSIBLE_BIN=/root/.local/bin
-readonly INSTALL_PACKAGE_CMD="dnf -y install"
+#readonly INSTALL_PACKAGE_CMD="dnf -y install"
+readonly INSTALL_PACKAGE_CMD="apt -y install"
 
 # check root user
 readonly USERID=`id | sed 's/uid=\([0-9]*\)(.*/\1/'`
@@ -69,12 +70,13 @@ fi
 
 # Install ansible command
 if ! type -P ansible >/dev/null ; then
-    if [ "${DIST_NAME}" == 'CentOS' ]; then
-        ${INSTALL_PACKAGE_CMD} ansible-core
-    elif [ "${DIST_NAME}" == 'Rocky Linux' ]; then
-        ${INSTALL_PACKAGE_CMD} ansible-core
-    # elif [ "${DIST_NAME}" == 'Alma Linux' ]; then
-    fi
+    ${INSTALL_PACKAGE_CMD} ansible
+    # if [ "${DIST_NAME}" == 'CentOS' ]; then
+    #     ${INSTALL_PACKAGE_CMD} ansible-core
+    # elif [ "${DIST_NAME}" == 'Rocky Linux' ]; then
+    #     ${INSTALL_PACKAGE_CMD} ansible-core
+    # # elif [ "${DIST_NAME}" == 'Alma Linux' ]; then
+    # fi
 fi
 
 # If ansible not installed, install ansible by local mode
@@ -87,7 +89,6 @@ fi
 #     readonly ANSIBLE_LOCAL_MODE=false
 # fi
 # Install Ansible
-apt install ansible
 
 # Install git command
 ${INSTALL_PACKAGE_CMD} git
