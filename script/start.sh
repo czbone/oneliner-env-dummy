@@ -15,8 +15,8 @@
 # Define macro parameter
 readonly GITHUB_USER="czbone"
 readonly GITHUB_REPO="oneliner-env-dummy"
-readonly WORK_DIR=/root/${GITHUB_REPO}_work
 readonly PLAYBOOK="dummy"
+readonly WORK_DIR=/root/${GITHUB_REPO}_work
 readonly INSTALL_PACKAGE_CMD="apt -y install"
 
 # check root user
