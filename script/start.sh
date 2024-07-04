@@ -9,7 +9,7 @@
 # Options:      -test      test mode execution with the latest source package
 # Description:  This script builds server environment by one-liner command.
 # Version History:
-#               6.0  (2024-07-03) renewal release for Ubuntu
+#               6.0  (2024-07-03) renewal release limited to Ubuntu
 # License:      MIT License
 
 # Define macro parameter
@@ -72,9 +72,6 @@ if ! type -P ansible >/dev/null ; then
     add-apt-repository --yes --update ppa:ansible/ansible
     ${INSTALL_PACKAGE_CMD} ansible-core
 fi
-
-# Install git command
-#${INSTALL_PACKAGE_CMD} git
 
 # Download the latest repository archive
 if ${TEST_MODE}; then
